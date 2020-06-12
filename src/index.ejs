@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Root Config</title>
+  <!--
+    Remove this if you only support browsers that support async/await.
+    This is needed by babel to share largeish helper code for compiling async/await in older
+    browsers. More information at https://github.com/single-spa/create-single-spa/issues/112
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.5/runtime.min.js"></script>
+  <!-- 
+    This CSP allows any SSL-enabled host, but you should limit these directives further to increase your app's security.
+    Learn more about CSP policies at https://content-security-policy.com/#directive
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
+  <meta name="importmap-type" content="systemjs-importmap" />
+
+  <!-- Shared dependencies go into this import map. Your shared dependencies must be of one of the following formats:
+
+    1. System.register (preferred when possible) - https://github.com/systemjs/systemjs/blob/master/docs/system-register.md
+    2. UMD - https://github.com/umdjs/umd
+    3. Global variable
+
+    More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
+  -->
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@fortawesome/fontawesome-free": "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/js/fontawesome.min.js",
+        "@fortawesome/free-solid-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-solid-svg-icons/index.min.js",
+        "@fortawesome/free-brands-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-brands-svg-icons/index.min.js",
+        "@fortawesome/free-regular-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-regular-svg-icons/index.min.js",
+        "@fortawesome/react-fontawesome": "https://cdn.jsdelivr.net/npm/react-fontawesome/lib/index.min.js",
+        "dayjs": "https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js",
+        "sass": "https://cdn.jsdelivr.net/npm/sass/sass.dart.min.js",
+        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.1/lib/system/single-spa.min.js",
+        "react": "https://cdn.jsdelivr.net/npm/react@16.13.0/umd/react.production.min.js",
+        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.0/umd/react-dom.production.min.js",
+        "rxjs": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs@6.5.5/system/rxjs.min.js",
+        "rxjs/operators": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs@6.5.5/system/rxjs-operators.min.js",
+        "axios": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",
+        "@msc-tellco/catalogue": "http://localhost:8500/msc-tellco-catalogue.js",
+        "@msc-tellco/root-config": "http://localhost:9000/msc-tellco-root-config.js",
+        "@msc-tellco/styleguide": "http://localhost:9500/msc-tellco-styleguide.js",
+        "@msc-tellco/reviews": "http://localhost:7500/msc-tellco-reviews.js",
+        "@msc-tellco/shopping-cart": "http://localhost:7000/msc-tellco-shopping-cart.js",
+        "@msc-tellco/navbar": "http://localhost:8000/msc-tellco-navbar.js"
+      }
+    }
+  </script>
+
+  <!-- Add your organization's prod import map URL to this script's src  -->
+  <!-- <script type="systemjs-importmap" src="/importmap.json"></script> -->
+
+  <% if (isLocal) { %>
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@msc-tellco/reviews": "http://localhost:7500/msc-tellco-reviews.js",
+        "@msc-tellco/navbar": "http://localhost:8000/msc-tellco-navbar.js",
+        "@msc-tellco/catalogue": "http://localhost:8500/msc-tellco-catalogue.js",
+        "@msc-tellco/root-config": "http://localhost:9000/msc-tellco-root-config.js",
+        "@msc-tellco/styleguide": "http://localhost:9500/msc-tellco-styleguide.js"
+      }
+    }
+  </script>
+  <% } %>
+  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides/dist/import-map-overrides.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/amd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/extras/named-exports.min.js"></script>
+  <template id="single-spa-layout">
+    <single-spa-router>
+      <nav>
+        <application name="@msc-tellco/navbar"></application>
+      </nav>
+      <div class="main-content" style="margin-top: 160px;">
+        <route path="cart">
+          <application name="@msc-tellco/shopping-cart"></application>
+        </route>
+        <route path="/">
+          <application name="@msc-tellco/catalogue"></application>
+        </route>
+        <route default>
+          <h1 class="flex flex-row justify-center p-16">
+            <p class="max-w-md">Nice try!</p>
+          </h1>
+        </route>
+      </div>
+    </single-spa-router>
+  </template>
+</head>
+<body>
+  <main></main>
+  <script>
+    System.import('@msc-tellco/root-config');
+    System.import('@msc-tellco/styleguide');
+  </script>
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
+</html>
