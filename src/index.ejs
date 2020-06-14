@@ -26,30 +26,7 @@
 
     More information about shared dependencies can be found at https://single-spa.js.org/docs/recommended-setup#sharing-with-import-maps.
   -->
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@fortawesome/fontawesome-free": "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/js/fontawesome.min.js",
-        "@fortawesome/free-solid-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-solid-svg-icons/index.min.js",
-        "@fortawesome/free-brands-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-brands-svg-icons/index.min.js",
-        "@fortawesome/free-regular-svg-icons": "https://cdn.jsdelivr.net/npm/@fortawesome/free-regular-svg-icons/index.min.js",
-        "@fortawesome/react-fontawesome": "https://cdn.jsdelivr.net/npm/react-fontawesome/lib/index.min.js",
-        "dayjs": "https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js",
-        "sass": "https://cdn.jsdelivr.net/npm/sass/sass.dart.min.js",
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.5.1/lib/system/single-spa.min.js",
-        "react": "https://cdn.jsdelivr.net/npm/react@16.13.0/umd/react.production.min.js",
-        "react-dom": "https://cdn.jsdelivr.net/npm/react-dom@16.13.0/umd/react-dom.production.min.js",
-        "rxjs": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs@6.5.5/system/rxjs.min.js",
-        "rxjs/operators": "https://cdn.jsdelivr.net/npm/@esm-bundle/rxjs@6.5.5/system/rxjs-operators.min.js",
-        "axios": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",
-        "@msc-tellco/catalogue": "http://localhost:8500/msc-tellco-catalogue.js",
-        "@msc-tellco/root-config": "http://localhost:9000/msc-tellco-root-config.js",
-        "@msc-tellco/styleguide": "http://localhost:9500/msc-tellco-styleguide.js",
-        "@msc-tellco/reviews": "http://localhost:7500/msc-tellco-reviews.js",
-        "@msc-tellco/shopping-cart": "http://localhost:7000/msc-tellco-shopping-cart.js",
-        "@msc-tellco/navbar": "http://localhost:8000/msc-tellco-navbar.js"
-      }
-    }
+  <script type="systemjs-importmap" src="https://storage.googleapis.com/msc-tellco-single-spa/importmap.json">
   </script>
 
   <!-- Add your organization's prod import map URL to this script's src  -->
@@ -59,11 +36,7 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@msc-tellco/reviews": "http://localhost:7500/msc-tellco-reviews.js",
-        "@msc-tellco/navbar": "http://localhost:8000/msc-tellco-navbar.js",
-        "@msc-tellco/catalogue": "http://localhost:8500/msc-tellco-catalogue.js",
-        "@msc-tellco/root-config": "http://localhost:9000/msc-tellco-root-config.js",
-        "@msc-tellco/styleguide": "http://localhost:9500/msc-tellco-styleguide.js"
+        "@msc-tellco/root-config": "http://localhost:9000/msc-tellco-root-config.js"
       }
     }
   </script>
@@ -81,13 +54,8 @@
         <route path="cart">
           <application name="@msc-tellco/shopping-cart"></application>
         </route>
-        <route path="/">
-          <application name="@msc-tellco/catalogue"></application>
-        </route>
         <route default>
-          <h1 class="flex flex-row justify-center p-16">
-            <p class="max-w-md">Nice try!</p>
-          </h1>
+          <application name="@msc-tellco/catalogue"></application>
         </route>
       </div>
     </single-spa-router>

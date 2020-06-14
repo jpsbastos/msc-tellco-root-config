@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "webpack-dev-server --mode=development --port 9000 --env.isLocal=true",
-    "lint": "eslint src --ext js,ts,tsx",
+    "lint": "eslint src --ext js,ts,tsx --fix",
     "test": "jest --passWithNoTests",
     "format": "prettier --write './**'",
     "build": "webpack --mode=production"
@@ -45,7 +45,7 @@
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
     "@types/webpack-env": "^1.15.1",
-    "single-spa": "^5.3.1",
+    "single-spa": "^5.5.3",
     "single-spa-layout": "^1.0.0-beta.2"
   }
 }
